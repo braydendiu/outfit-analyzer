@@ -143,30 +143,31 @@ export default function ImageAnalysis() {
     try {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('gender', gender);
 
-      const apiUrl = `${process.env.VITE_API_URL}/api/analyze-image`;
-      const response = await fetch(apiUrl, {
+      console.log('Sending request to analyze image...');
+      
+      // Get the backend URL from environment or use your Render backend URL
+      const backendUrl = 'https://outfit-analyzer-backend.onrender.com';
+
+      const response = await fetch(`${backendUrl}/api/analyze-image`, {
         method: 'POST',
         body: formData,
-        credentials: 'include',
       });
+
+      console.log('Response received:', response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`Analysis failed (${response.status}): ${errorText}`);
+        throw new Error(`Server error: ${errorText}`);
       }
 
       const result = await response.json();
-      
-      if (result.error) {
-        throw new Error(result.error);
-      }
-      
+      console.log('Analysis result:', result);
       setAnalysis(result);
       
-    } catch (err) {
-      setError(err.message || 'Failed to analyze image. Please try again.');
+    } catch (error) {
+      console.error('Error analyzing image:', error);
+      setError('Failed to analyze image: ' + error.message);
     } finally {
       setLoading(false);
     }
