@@ -10,7 +10,36 @@ An AI-powered fashion analysis tool that provides color analysis and personalize
 - Real-time image preview
 
 ## Tech Stack
-- React
+Frontend:
+
+- React.js
 - Tailwind CSS
+- Lucide Icons
+- JavaScript/JSX
+
+Backend:
+
 - Python
-- FastAPI Backend
+- FastAPI
+- OpenCV
+- scikit-learn
+- NumPy
+- PIL (Python Imaging Library)
+
+APIs & Services:
+
+- SHEIN RapidAPI
+- RESTful APIs
+
+Development & Deployment:
+
+- Git
+- Render (Deployment)
+- CORS handling
+
+Computer Vision & AI:
+
+- K-means clustering (for color extraction)
+- HSV color space analysis
+- Image processing algorithms
+- Pattern recognition
