@@ -1,6 +1,13 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from services.image_processor import EnhancedImageProcessor
+# Fix the import
+import sys
+import os
+
+# Add the current directory to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from server.services.image_processor import EnhancedImageProcessor
+
 import uvicorn
 import logging
 
@@ -10,11 +17,11 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
-# Updated CORS configuration
+# CORS configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allow all origins temporarily for testing
-    allow_credentials=False,  # Change to False since we're allowing all origins
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -40,4 +47,7 @@ async def analyze_image(file: UploadFile = File(...)):
         
     except Exception as e:
         logger.error(f"Error processing image: {str(e)}")
-        return {"error": str(e)}  # Return error as JSON
+        return {"error": str(e)}
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
