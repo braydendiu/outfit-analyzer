@@ -12,5 +12,5 @@ An AI-powered fashion analysis tool that provides color analysis and personalize
 ## Tech Stack
 - React
 - Tailwind CSS
-- Lucide React Icons
+- Python
 - FastAPI Backend
