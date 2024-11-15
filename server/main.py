@@ -1,7 +1,7 @@
 from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from services.image_processor import EnhancedImageProcessor
+from .services.image_processor import EnhancedImageProcessor
 import json
 import numpy as np
 
