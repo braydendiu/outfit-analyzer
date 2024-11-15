@@ -1,6 +1,6 @@
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from services.image_processor import EnhancedImageProcessor
+from .services.image_processor import EnhancedImageProcessor 
 import uvicorn
 import logging
 
