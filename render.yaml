@@ -12,7 +12,6 @@ services:
         source: /*
         destination: /index.html
 
-services:
   - type: web
     name: outfit-analyzer-backend
     env: python
