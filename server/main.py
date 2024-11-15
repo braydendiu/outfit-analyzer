@@ -58,6 +58,10 @@ async def analyze_image(
         print(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/")
+def read_root():
+    return {"message": "Backend is running"}
+
 # This section is for local development. Render will start the server automatically.
 if __name__ == "__main__":
     import uvicorn
