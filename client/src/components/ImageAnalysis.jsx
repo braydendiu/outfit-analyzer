@@ -145,7 +145,8 @@ export default function ImageAnalysis() {
       formData.append('file', file);
       formData.append('gender', gender);
 
-      const response = await fetch('http://localhost:8000/api/analyze-image', {
+      const apiUrl = `${process.env.VITE_API_URL}/api/analyze-image`;
+      const response = await fetch(apiUrl, {
         method: 'POST',
         body: formData,
         credentials: 'include',
