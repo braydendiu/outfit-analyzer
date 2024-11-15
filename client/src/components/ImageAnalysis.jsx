@@ -143,15 +143,15 @@ export default function ImageAnalysis() {
     try {
       const formData = new FormData();
       formData.append('file', file);
+      formData.append('gender', gender);  // Add gender to formData
 
       const BACKEND_URL = 'https://outfit-analyzer-backend.onrender.com';
       console.log('Sending request to:', BACKEND_URL);
+      console.log('Selected gender:', gender);  // Log gender for debugging
 
       const response = await fetch(`${BACKEND_URL}/api/analyze-image`, {
         method: 'POST',
         body: formData,
-        // Remove headers that might cause issues
-        // Add mode: 'cors' explicitly
         mode: 'cors',
       });
 

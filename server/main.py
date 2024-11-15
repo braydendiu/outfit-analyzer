@@ -1,6 +1,5 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-# Fix the import
 import sys
 import os
 
@@ -33,15 +32,20 @@ async def root():
     return {"message": "Fashion Trend Analyzer API"}
 
 @app.post("/api/analyze-image")
-async def analyze_image(file: UploadFile = File(...)):
+async def analyze_image(
+    file: UploadFile = File(...),
+    gender: str = Form(default="women")  # Add gender parameter with default value
+):
     try:
         logger.info(f"Received image: {file.filename}")
         logger.info(f"Content type: {file.content_type}")
+        logger.info(f"Selected gender: {gender}")
         
         if not file.content_type.startswith("image/"):
             raise HTTPException(status_code=400, detail="File must be an image")
         
-        result = await image_processor.analyze(file)
+        # Pass gender to analyze method
+        result = await image_processor.analyze(file, gender)
         logger.info("Analysis completed successfully")
         return result
         
