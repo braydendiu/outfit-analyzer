@@ -144,21 +144,23 @@ export default function ImageAnalysis() {
       const formData = new FormData();
       formData.append('file', file);
 
-      console.log('Sending request to analyze image...');
-      
-      // Get the backend URL from environment or use your Render backend URL
-      const backendUrl = 'https://outfit-analyzer-backend.onrender.com';
+      const BACKEND_URL = 'https://outfit-analyzer-backend.onrender.com';
+      console.log('Sending request to:', BACKEND_URL);
 
-      const response = await fetch(`${backendUrl}/api/analyze-image`, {
+      const response = await fetch(`${BACKEND_URL}/api/analyze-image`, {
         method: 'POST',
         body: formData,
+        // Remove headers that might cause issues
+        // Add mode: 'cors' explicitly
+        mode: 'cors',
       });
 
       console.log('Response received:', response.status);
 
       if (!response.ok) {
         const errorText = await response.text();
-        throw new Error(`Server error: ${errorText}`);
+        console.error('Server error:', errorText);
+        throw new Error(`Server error: ${response.status}`);
       }
 
       const result = await response.json();
@@ -167,7 +169,7 @@ export default function ImageAnalysis() {
       
     } catch (error) {
       console.error('Error analyzing image:', error);
-      setError('Failed to analyze image: ' + error.message);
+      setError(`Failed to analyze image: ${error.message}`);
     } finally {
       setLoading(false);
     }
