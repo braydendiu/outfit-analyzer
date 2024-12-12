@@ -1,6 +1,7 @@
 # Fashion Trend Analyzer
 
 An AI-powered fashion analysis tool that provides color analysis and personalized outfit recommendations based on uploaded images.
+Check it out here: https://outfit-analyzer-frontend.onrender.com
  
 ## Features
 - Image upload with drag & drop support
@@ -14,7 +15,6 @@ Frontend:
 
 - React.js
 - Tailwind CSS
-- Lucide Icons
 - JavaScript/JSX
 
 Backend:
